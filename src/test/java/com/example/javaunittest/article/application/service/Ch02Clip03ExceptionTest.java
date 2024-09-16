@@ -29,7 +29,6 @@ public class Ch02Clip03ExceptionTest {
     @BeforeEach
     void setUp() {
         sut = new ArticleService(loadArticlePort, commandArticlePort, loadBoardPort);
-        ;
     }
 
     @Test
