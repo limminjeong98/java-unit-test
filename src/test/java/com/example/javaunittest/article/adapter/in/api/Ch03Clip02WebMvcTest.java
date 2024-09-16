@@ -1,6 +1,7 @@
 package com.example.javaunittest.article.adapter.in.api;
 
 import com.example.javaunittest.article.adapter.in.api.dto.ArticleDto;
+import com.example.javaunittest.article.adapter.in.api.dto.BoardDto;
 import com.example.javaunittest.article.application.port.in.CreateArticleUseCase;
 import com.example.javaunittest.article.application.port.in.DeleteArticleUseCase;
 import com.example.javaunittest.article.application.port.in.GetArticleUseCase;
@@ -203,7 +204,8 @@ public class Ch03Clip02WebMvcTest {
                 }
         )
         void invalidParam_BadRequest(String desc, String subject, String content, String username) throws Exception {
-            var body = objectMapper.writeValueAsString(new ArticleDto.CreateArticleRequest(5L, subject, content, username));
+            // var body = objectMapper.writeValueAsString(new ArticleDto.CreateArticleRequest(5L, subject, content, username));
+            var body = objectMapper.writeValueAsString(new ArticleDto.UpdateArticleRequest(1L, new BoardDto(5L, "board"), subject, content, username));
             // String body = objectMapper.writeValueAsString(Map.of("id", 1L, "board", Map.of("id", 5L, "name", "board"), "subject", subject, "content", content, "username", username));
             mockMvc
                     .perform(
