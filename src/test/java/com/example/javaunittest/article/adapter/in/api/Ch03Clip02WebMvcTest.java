@@ -25,6 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
 import java.util.Map;
 
+import static com.example.javaunittest.article.domain.BoardType.GENERAL;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.willDoNothing;
@@ -205,7 +206,7 @@ public class Ch03Clip02WebMvcTest {
         )
         void invalidParam_BadRequest(String desc, String subject, String content, String username) throws Exception {
             // var body = objectMapper.writeValueAsString(new ArticleDto.CreateArticleRequest(5L, subject, content, username));
-            var body = objectMapper.writeValueAsString(new ArticleDto.UpdateArticleRequest(1L, new BoardDto(5L, "board"), subject, content, username));
+            var body = objectMapper.writeValueAsString(new ArticleDto.UpdateArticleRequest(1L, new BoardDto.BoardResponse(5L, "board", GENERAL), subject, content, username));
             // String body = objectMapper.writeValueAsString(Map.of("id", 1L, "board", Map.of("id", 5L, "name", "board"), "subject", subject, "content", content, "username", username));
             mockMvc
                     .perform(

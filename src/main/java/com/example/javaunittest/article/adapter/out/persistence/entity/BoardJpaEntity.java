@@ -1,6 +1,7 @@
 package com.example.javaunittest.article.adapter.out.persistence.entity;
 
 import com.example.javaunittest.article.domain.Board;
+import com.example.javaunittest.article.domain.BoardType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,13 +18,19 @@ public class BoardJpaEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "board_type", nullable = false)
+    private BoardType boardType;
+
     public BoardJpaEntity(String name) {
         this.name = name;
+        this.boardType = BoardType.GENERAL;
     }
 
     private BoardJpaEntity(Long id, String name) {
         this.id = id;
         this.name = name;
+        this.boardType = BoardType.GENERAL;
     }
 
     public static BoardJpaEntity fromDomain(Board board) {
@@ -31,6 +38,6 @@ public class BoardJpaEntity {
     }
 
     public Board toDomain() {
-        return new Board(this.id, this.name);
+        return new Board(this.id, this.name, this.boardType);
     }
 }

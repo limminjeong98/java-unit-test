@@ -23,7 +23,7 @@ public class ArticleDto {
     public record UpdateArticleRequest(
             Long id,
             @NotNull
-            BoardDto board,
+            BoardDto.BoardResponse board,
             @NotNull
             String subject,
             @NotNull

@@ -27,6 +27,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import static com.example.javaunittest.article.domain.BoardType.GENERAL;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.assertj.core.api.BDDAssertions.thenThrownBy;
 import static org.mockito.ArgumentMatchers.any;
@@ -169,7 +170,7 @@ public class ArticleServiceTest {
 
         @BeforeEach
         void setUp() {
-            request = new ArticleDto.UpdateArticleRequest(6L, new BoardDto(6L, "board"), "new subject", "new content", "user");
+            request = new ArticleDto.UpdateArticleRequest(6L, new BoardDto.BoardResponse(6L, "board", GENERAL), "new subject", "new content", "user");
         }
 
         @Test
@@ -216,7 +217,7 @@ public class ArticleServiceTest {
         @DisplayName("user가 다르면 AccessDeniedException throw")
         void otherUser_throwException() {
             // given
-            ArticleDto.UpdateArticleRequest request = new ArticleDto.UpdateArticleRequest(6L, new BoardDto(6L, "board"), "new subject", "new content", "other user");
+            ArticleDto.UpdateArticleRequest request = new ArticleDto.UpdateArticleRequest(6L, new BoardDto.BoardResponse(6L, "board", GENERAL), "new subject", "new content", "other user");
             Article article = ArticleFixtures.article();
             given(loadArticlePort.findArticleById(any()))
                     .willReturn(Optional.of(article));
